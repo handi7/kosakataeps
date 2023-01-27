@@ -6,7 +6,7 @@ export default async function getKamus(req, res) {
 
     const result = await getDb(query);
 
-    res.status(200).send(result);
+    res.status(200).json(result);
   } catch (error) {
     console.log(error);
   }
