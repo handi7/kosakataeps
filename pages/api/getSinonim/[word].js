@@ -1,12 +1,10 @@
-import { getDb } from "../../database/database";
+import { getDb } from "../../../database/database";
 
 export default async function getKamus(req, res) {
   try {
-    let query = `select * from kamus where bab = 3;`;
+    let query = `select * from sinonim where kor like '${req.query.word}%' or ind like '${req.query.word}%';`;
 
     const result = await getDb(query);
-
-    console.log(result);
 
     res.status(200).send(result);
   } catch (error) {
