@@ -5,7 +5,7 @@ export const getKamus = async (dispatch, word) => {
   try {
     if (!word) return dispatch({ type: LOADING, payload: false });
     dispatch({ type: LOADING, payload: true });
-    const res = await axios.get(`/api/getKamus/${word}`);
+    const res = await axios.post(`/api/getKamus`, { word });
     dispatch({ type: GET_WORDS, payload: res.data });
   } catch (error) {}
 };
