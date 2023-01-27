@@ -21,17 +21,12 @@ export default function Home() {
           <div>
             {data?.loading ? (
               <div
-                style={{ minHeight: "100vh" }}
                 className={
-                  "d-flex flext-column justify-content-center align-items-center"
+                  "d-flex flext-column justify-content-center align-items-center mt-5 pt-5"
                 }
               >
-                <div>
-                  <Spinner color="light" />
-                </div>
-                <div>
-                  <span className="text-white">Sedang mencari. . .</span>
-                </div>
+                <Spinner color="light" />
+                <span className="text-white">Sedang mencari. . .</span>
               </div>
             ) : data?.words?.length > 0 ? (
               data?.words?.map((item) => {
