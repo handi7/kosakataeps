@@ -1,11 +1,13 @@
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Container } from "reactstrap";
 import classes from "../styles/header.module.css";
 import { getAntonim, getKamus, getSinonim } from "../store/actions/wordAction";
+import { SEARCH_TYPE, SEARCH_WORD } from "../store/types";
 
 export default function Header() {
+  const search = useSelector((state) => state.search);
   const headerRef = useRef(null);
   const dispatch = useDispatch();
 
@@ -24,27 +26,39 @@ export default function Header() {
 
   const inputHandler = (e) => {
     const { name, value } = e.target;
-    setSearchData({ ...searchData, [name]: value });
-  };
-
-  useEffect(() => {
-    switch (searchData?.type) {
-      case "kamus":
-        getKamus(dispatch, searchData?.word);
+    switch (name) {
+      case "word":
+        dispatch({ type: SEARCH_WORD, payload: value });
         break;
 
-      case "antonim":
-        getAntonim(dispatch, searchData?.word);
-        break;
-
-      case "sinonim":
-        getSinonim(dispatch, searchData?.word);
+      case "type":
+        dispatch({ type: SEARCH_TYPE, payload: value });
         break;
 
       default:
         break;
     }
-  }, [searchData]);
+    setSearchData({ ...searchData, [name]: value });
+  };
+
+  useEffect(() => {
+    switch (search?.type) {
+      case "kamus":
+        getKamus(dispatch, search?.word);
+        break;
+
+      case "antonim":
+        getAntonim(dispatch, search?.word);
+        break;
+
+      case "sinonim":
+        getSinonim(dispatch, search?.word);
+        break;
+
+      default:
+        break;
+    }
+  }, [search]);
 
   useEffect(() => {
     window.addEventListener("scroll", headerFunc);
