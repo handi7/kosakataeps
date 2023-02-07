@@ -20,7 +20,7 @@ export default function Home() {
               key={idx}
               className={`bg-transparent text-${
                 isMatch ? "warning" : "white"
-              } py-5 px-2`}
+              } px-2`}
             >
               {words.length === idx + 1 ? item : `${item},`}
             </span>
