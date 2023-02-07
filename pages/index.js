@@ -19,7 +19,7 @@ export default function Home() {
             <span
               key={idx}
               className={`bg-transparent text-${
-                isMatch ? "primary" : "white"
+                isMatch ? "warning" : "white"
               } py-5 px-2`}
             >
               {words.length === idx + 1 ? item : `${item},`}
