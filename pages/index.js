@@ -48,8 +48,8 @@ export default function Home() {
               data?.words?.length > 0 ? (
                 <div>
                   <p>
-                    Hasil pencarian {search?.type} dengan kata kunci "
-                    {search?.word}".
+                    Hasil pencarian {search?.type} dengan kata kunci &quot;
+                    {search?.word}&quot;.
                   </p>
                   {data?.words?.map((item) => {
                     return (
@@ -81,8 +81,8 @@ export default function Home() {
               ) : (
                 <div className="text-center">
                   <p>
-                    Tidak ditemukan hasil pencarian dengan kata kunci "
-                    {search?.word}".
+                    Tidak ditemukan hasil pencarian dengan kata kunci &quot;
+                    {search?.word}&quot;.
                   </p>
                 </div>
               )
