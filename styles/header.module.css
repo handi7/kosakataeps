@@ -297,28 +297,12 @@
   .logo h1 {
     font-size: 1.3rem !important;
   }
-
-  .select {
-    padding: 7px;
-  }
-
-  .input_search {
-    padding: 7px;
-  }
 }
 
 @media only screen and (max-width: 768px) {
   .header {
     height: 60px;
-    line-height: 60px;
-  }
-
-  .select {
-    padding: 5px;
-  }
-
-  .input_search {
-    padding: 5px;
+    /* line-height: 60px; */
   }
 }
 
