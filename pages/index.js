@@ -121,6 +121,7 @@ export default function Home() {
                     />
                   </div>
                   <a
+                    rel="noreferrer"
                     href="https://play.google.com/store/apps/details?id=com.handev.krid15"
                     target="_blank"
                   >
