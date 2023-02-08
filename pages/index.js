@@ -2,6 +2,8 @@ import { Fragment } from "react";
 import Layout from "../components";
 import { Col, Container, Row, Spinner } from "reactstrap";
 import { useSelector } from "react-redux";
+import { Adsense } from "@ctrl/react-adsense";
+import Image from "next/image";
 
 export default function Home() {
   const data = useSelector((state) => state.words);
@@ -51,29 +53,44 @@ export default function Home() {
                     Hasil pencarian {search?.type} dengan kata kunci &quot;
                     {search?.word}&quot;.
                   </p>
-                  {data?.words?.map((item) => {
+                  {data?.words?.map((item, idx) => {
                     return (
-                      <div
-                        key={item.id}
-                        className="bg-transparent border shadow rounded p-2 my-1"
-                      >
-                        {item?.kor ? (
-                          <>
-                            <Item word={item?.kor} />
-                            <Item word={item?.ind} />
-                          </>
-                        ) : (
-                          <Row className="bg-transparent">
-                            <Col xs={6} className="bg-transparent text-center">
-                              <Item word={item?.kor1} />
-                              <Item word={item?.ind1} />
-                            </Col>
-                            <Col xs={6} className="bg-transparent text-center">
-                              <Item word={item?.kor2} />
-                              <Item word={item?.ind2} />
-                            </Col>
-                          </Row>
-                        )}
+                      <div key={item.id}>
+                        <div className="bg-transparent border shadow rounded p-2 my-1">
+                          {item?.kor ? (
+                            <>
+                              <Item word={item?.kor} />
+                              <Item word={item?.ind} />
+                            </>
+                          ) : (
+                            <Row className="bg-transparent">
+                              <Col
+                                xs={6}
+                                className="bg-transparent text-center"
+                              >
+                                <Item word={item?.kor1} />
+                                <Item word={item?.ind1} />
+                              </Col>
+                              <Col
+                                xs={6}
+                                className="bg-transparent text-center"
+                              >
+                                <Item word={item?.kor2} />
+                                <Item word={item?.ind2} />
+                              </Col>
+                            </Row>
+                          )}
+                        </div>
+                        {(idx + 1) % 10 === 0 ? (
+                          // responsive and native ads
+                          <Adsense
+                            client="ca-pub-2941796843013407"
+                            slot="5327133669"
+                            style={{ display: "block" }}
+                            layout="in-article"
+                            format="fluid"
+                          />
+                        ) : null}
                       </div>
                     );
                   })}
@@ -89,9 +106,27 @@ export default function Home() {
             ) : (
               <div className="text-center mt-5">
                 <h4>
-                  Kumpulan kosakata dari standard rext book tahun 2015 EPS TOPIK
+                  Kumpulan kosakata dari standard text book tahun 2015 EPS TOPIK
                 </h4>
                 <p>hasil pencarian akan ditampilkan di sini.</p>
+
+                <div className="mt-5 pt-5">
+                  <h5>Tersedia juga dalam bentuk android app.</h5>
+                  <div>
+                    <Image
+                      src="/brand.png"
+                      width={50}
+                      height={50}
+                      alt="brand"
+                    />
+                  </div>
+                  <a
+                    href="https://play.google.com/store/apps/details?id=com.handev.krid15"
+                    target="_blank"
+                  >
+                    Download disini.
+                  </a>
+                </div>
               </div>
             )}
           </div>

@@ -5,6 +5,9 @@ import { Container } from "reactstrap";
 import classes from "../styles/header.module.css";
 import { getAntonim, getKamus, getSinonim } from "../store/actions/wordAction";
 import { SEARCH_TYPE, SEARCH_WORD } from "../store/types";
+import { BsSearch } from "react-icons/bs";
+import { RiCloseFill } from "react-icons/ri";
+import Image from "next/image";
 
 export default function Header() {
   const search = useSelector((state) => state.search);
@@ -12,6 +15,7 @@ export default function Header() {
   const dispatch = useDispatch();
 
   const [searchData, setSearchData] = useState({ word: "", type: "kamus" });
+  const [isSearch, setSearch] = useState(false);
 
   const headerFunc = () => {
     if (
@@ -72,30 +76,42 @@ export default function Header() {
           {/* ======== navigation logo ======== */}
           <div className={`${classes.logo}`}>
             <Link href="/">
-              <h1>STB2015</h1>
+              <Image src="/brand.png" width={35} height={35} alt="brand" />
+              {/* <h1>STB2015</h1> */}
             </Link>
           </div>
 
           <div className={classes.right}>
-            <select
-              className={classes.select}
-              name="type"
-              value={searchData?.type}
-              onChange={inputHandler}
-            >
-              <option value="kamus">Kamus</option>
-              <option value="antonim">Antonim(Bandaemal)</option>
-              <option value="sinonim">Sinonim(Bisethanmal)</option>
-            </select>
+            {isSearch && (
+              <select
+                className={classes.select}
+                name="type"
+                value={searchData?.type}
+                onChange={inputHandler}
+              >
+                <option value="kamus">Kamus</option>
+                <option value="antonim">반대말</option>
+                <option value="sinonim">비슷한 말</option>
+              </select>
+            )}
 
-            <input
-              type="text"
-              placeholder="cari"
-              className={classes.input_search}
-              name="word"
-              value={searchData?.word}
-              onChange={inputHandler}
-            />
+            {isSearch && (
+              <input
+                type="text"
+                placeholder="cari"
+                className={classes.input_search}
+                name="word"
+                value={searchData?.word}
+                onChange={inputHandler}
+              />
+            )}
+
+            <button
+              className="secondary__btn"
+              onClick={() => setSearch(!isSearch)}
+            >
+              {isSearch ? <RiCloseFill /> : <BsSearch />}
+            </button>
           </div>
         </div>
       </Container>
