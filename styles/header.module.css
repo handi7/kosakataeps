@@ -17,21 +17,25 @@
   padding-top: 1.5%;
 }
 
-.logo a {
+.left {
+  display: flex;
+}
+
+.left a {
   text-decoration: none;
 }
 
-.logo h1 {
+.left h1 {
   font-size: 2rem;
   margin-bottom: 0;
   transition: 0.5s;
 }
 
-.logo h1 span {
+.left h1 span {
   color: #01d293;
 }
 
-.logo h1:hover {
+.left h1:hover {
   transform: scale(1.1);
   transition: 0.3s;
 }
@@ -65,6 +69,12 @@
   display: flex;
   align-items: center;
   column-gap: 2.8rem;
+}
+
+.nav__menu a {
+  width: 100%;
+  padding: 10px;
+  color: white;
 }
 
 .dropdown {
@@ -155,10 +165,10 @@
 .mobile__menu i {
   font-size: 1.3rem;
   color: #fff;
-  cursor: pointer;
 }
 
 .mobile__menu {
+  cursor: pointer;
   display: none;
   background-color: transparent;
   transition: 0.3s;
@@ -274,12 +284,18 @@
   .nav__menu {
     position: absolute;
     top: 0;
-    right: 0;
+    left: 0;
     width: 300px;
     height: 100%;
+    padding-top: 40px;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center; */
     transition: 0.5s;
+    animation: slide-right 500ms forwards;
+  }
+
+  .nav__menu a:hover {
+    background-color: #01d293;
   }
 
   .nav__right {

@@ -7,11 +7,6 @@ import Script from "next/script";
 function MyApp({ Component, pageProps }) {
   return (
     <Provider store={store}>
-      <Script
-        async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2941796843013407"
-        crossorigin="anonymous"
-      ></Script>
       <Component {...pageProps} />
     </Provider>
   );

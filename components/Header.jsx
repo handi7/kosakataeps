@@ -7,11 +7,14 @@ import { getAntonim, getKamus, getSinonim } from "../store/actions/wordAction";
 import { SEARCH_TYPE, SEARCH_WORD } from "../store/types";
 import { BsSearch } from "react-icons/bs";
 import { RiCloseFill } from "react-icons/ri";
+import { AiOutlineMenu } from "react-icons/ai";
 import Image from "next/image";
+import { navData } from "./navData";
 
 export default function Header() {
   const search = useSelector((state) => state.search);
   const headerRef = useRef(null);
+  const menuRef = useRef(null);
   const dispatch = useDispatch();
 
   const [searchData, setSearchData] = useState({ word: "", type: "kamus" });
@@ -45,6 +48,10 @@ export default function Header() {
     setSearchData({ ...searchData, [name]: value });
   };
 
+  const toggleMenu = () => {
+    menuRef.current.classList.toggle(`${classes.menu__active}`);
+  };
+
   useEffect(() => {
     switch (search?.type) {
       case "kamus":
@@ -74,11 +81,34 @@ export default function Header() {
       <Container className={classes.container}>
         <div className={`${classes.nav__wrapper}`}>
           {/* ======== navigation logo ======== */}
-          <div className={`${classes.logo}`}>
-            <Link href="/">
-              <Image src="/brand.png" width={35} height={35} alt="brand" />
-              {/* <h1>STB2015</h1> */}
-            </Link>
+          <div className={`${classes.left}`}>
+            <span className={`${classes.mobile__menu}`} onClick={toggleMenu}>
+              <AiOutlineMenu />
+            </span>
+
+            {/* ========= nav menu =========== */}
+            <div
+              className={`${classes.navigation}`}
+              ref={menuRef}
+              onClick={toggleMenu}
+            >
+              <div className={`${classes.nav__menu}`}>
+                {navData.map((item, index) => {
+                  const current = item.path.slice(1) || "home";
+                  return (
+                    <Link
+                      // style={{
+                      //   color: tag.includes(current) ? "#01d293" : "",
+                      // }}
+                      href={item.path}
+                      key={index}
+                    >
+                      {item.display}
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
           </div>
 
           <div className={classes.right}>

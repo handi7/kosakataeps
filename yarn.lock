@@ -1793,6 +1793,11 @@ negotiator@^0.6.2:
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.3.tgz#58e323a72fedc0d6f9cd4d31fe49f51479590ccd"
   integrity sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg==
 
+next-google-ads@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/next-google-ads/-/next-google-ads-0.1.1.tgz#289bfe2ad3e6d66fef287d5f786b95bcf59596fb"
+  integrity sha512-NGtC4ibWJ8EjYM91uS6W70FdaVq1QSCBmmiA9dWU/C4oyIG2CKZs28SdAF3G0WaXBnlc5Crlnl86NjQF2ecl7w==
+
 next-redux-wrapper@^8.1.0:
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/next-redux-wrapper/-/next-redux-wrapper-8.1.0.tgz#d9c135f1ceeb2478375bdacd356eb9db273d3a07"

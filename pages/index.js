@@ -1,9 +1,10 @@
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import Layout from "../components";
 import { Col, Container, Row, Spinner } from "reactstrap";
 import { useSelector } from "react-redux";
-import { Adsense } from "@ctrl/react-adsense";
 import Image from "next/image";
+import GoogleAdsense from "next-google-ads";
+import Adsense from "../components/Adsense";
 
 export default function Home() {
   const data = useSelector((state) => state.words);
@@ -82,15 +83,17 @@ export default function Home() {
                           )}
                         </div>
                         {(idx + 1) % 10 === 0 ? (
-                          // responsive and native ads
                           <Adsense
-                            client="ca-pub-2941796843013407"
-                            slot="5327133669"
-                            style={{ display: "block" }}
-                            layout="in-article"
-                            format="fluid"
+                            adClient="ca-pub-2941796843013407"
+                            adSlot="5327133669"
                           />
-                        ) : null}
+                        ) : // responsive and native ads
+                        // <GoogleAdsense
+                        //   client="ca-pub-2941796843013407"
+                        //   slot="5327133669"
+                        //   responsive="true"
+                        // />
+                        null}
                       </div>
                     );
                   })}
@@ -110,6 +113,17 @@ export default function Home() {
                 </h4>
                 <p>hasil pencarian akan ditampilkan di sini.</p>
 
+                {/* <GoogleAdsense
+                  client="ca-pub-2941796843013407"
+                  slot="5327133669"
+                  responsive="true"
+                /> */}
+
+                <Adsense
+                  adClient="ca-pub-2941796843013407"
+                  adSlot="5327133669"
+                />
+
                 <div className="mt-5 pt-5">
                   <h5>Tersedia juga dalam bentuk android app.</h5>
                   <div>
@@ -128,6 +142,12 @@ export default function Home() {
                     Download disini.
                   </a>
                 </div>
+
+                <GoogleAdsense
+                  client="ca-pub-2941796843013407"
+                  slot="5327133669"
+                  responsive="true"
+                />
               </div>
             )}
           </div>
