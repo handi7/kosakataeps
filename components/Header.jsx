@@ -8,16 +8,17 @@ import { SEARCH_TYPE, SEARCH_WORD } from "../store/types";
 import { BsSearch } from "react-icons/bs";
 import { RiCloseFill } from "react-icons/ri";
 import { AiOutlineMenu } from "react-icons/ai";
-import Image from "next/image";
 import { navData } from "./navData";
+import { useRouter } from "next/router";
 
 export default function Header() {
   const search = useSelector((state) => state.search);
   const headerRef = useRef(null);
   const menuRef = useRef(null);
   const dispatch = useDispatch();
+  const router = useRouter();
+  const tag = router.pathname === "/" ? "home" : router.pathname;
 
-  const [searchData, setSearchData] = useState({ word: "", type: "kamus" });
   const [isSearch, setSearch] = useState(false);
 
   const headerFunc = () => {
@@ -45,7 +46,13 @@ export default function Header() {
       default:
         break;
     }
-    setSearchData({ ...searchData, [name]: value });
+  };
+
+  const toggleSearch = () => {
+    if (isSearch) {
+      dispatch({ type: SEARCH_WORD, payload: "" });
+    }
+    setSearch(!isSearch);
   };
 
   const toggleMenu = () => {
@@ -53,6 +60,9 @@ export default function Header() {
   };
 
   useEffect(() => {
+    if (search?.word) {
+      router.push("/");
+    }
     switch (search?.type) {
       case "kamus":
         getKamus(dispatch, search?.word);
@@ -82,7 +92,10 @@ export default function Header() {
         <div className={`${classes.nav__wrapper}`}>
           {/* ======== navigation logo ======== */}
           <div className={`${classes.left}`}>
-            <span className={`${classes.mobile__menu}`} onClick={toggleMenu}>
+            <span
+              className={`${classes.mobile__menu} text-white`}
+              onClick={toggleMenu}
+            >
               <AiOutlineMenu />
             </span>
 
@@ -97,9 +110,10 @@ export default function Header() {
                   const current = item.path.slice(1) || "home";
                   return (
                     <Link
-                      // style={{
-                      //   color: tag.includes(current) ? "#01d293" : "",
-                      // }}
+                      style={{
+                        color: tag.includes(current) ? "#01d293" : "",
+                        fontWeight: 700,
+                      }}
                       href={item.path}
                       key={index}
                     >
@@ -116,7 +130,7 @@ export default function Header() {
               <select
                 className={classes.select}
                 name="type"
-                value={searchData?.type}
+                value={search?.type}
                 onChange={inputHandler}
               >
                 <option value="kamus">Kamus</option>
@@ -131,15 +145,12 @@ export default function Header() {
                 placeholder="cari"
                 className={classes.input_search}
                 name="word"
-                value={searchData?.word}
+                value={search?.word}
                 onChange={inputHandler}
               />
             )}
 
-            <button
-              className="secondary__btn"
-              onClick={() => setSearch(!isSearch)}
-            >
+            <button className="secondary__btn" onClick={toggleSearch}>
               {isSearch ? <RiCloseFill /> : <BsSearch />}
             </button>
           </div>

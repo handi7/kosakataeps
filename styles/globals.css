@@ -46,15 +46,16 @@ footer {
 }
 
 .primary__btn {
-  background: #171f38 !important;
+  background: #1d2849 !important;
   padding: 7px 25px !important;
+  color: #01d293;
   border: 1px solid #01d293 !important;
   border-radius: 5px;
   transition: 0.5s;
 }
 
 .primary__btn:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
   transition: 0.3s;
 }
 

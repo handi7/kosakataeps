@@ -8,41 +8,36 @@ import {
   BsChevronRight,
 } from "react-icons/bs";
 import { Col, Row } from "reactstrap";
-import { API_URL } from "../constants";
+import { API_URL } from "../../constants";
 
-export default function Sinonim() {
+export default function Bab() {
   const router = useRouter();
-  const page = router.query.page || 1;
-  const pageSize = 30;
+  const { bab } = router.query;
 
   const [data, setData] = useState([]);
 
-  const getAntonim = async (page) => {
+  const getKamusByBab = async (bab) => {
     try {
-      const res = await axios.get(
-        `${API_URL}/sinonim/?offset=${(page - 1) * pageSize}&limit=${pageSize}`
-      );
-      setData(res.data);
-    } catch (error) {}
+      if (bab > 2 && bab <= 60) {
+        const res = await axios.get(`${API_URL}/kamus/getBab/${bab}`);
+        setData(res.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const onPrev = () => {
-    if (+page > 1) {
-      router.push(`/sinonim/?page=${+page - 1}`);
+    if (+bab > 3) {
+      router.push(`/kosakata/${+bab - 1}`);
     }
   };
 
   const onNext = () => {
-    if (+page < Math.ceil(data?.count / pageSize)) {
-      router.push(`/sinonim/?page=${+page + 1}`);
+    if (+bab < 60) {
+      router.push(`/kosakata/${+bab + 1}`);
     }
   };
-
-  useEffect(() => {
-    if (page) {
-      getAntonim(+page);
-    }
-  }, [page]);
 
   const Word = ({ word }) => {
     const words = word.split(",");
@@ -63,27 +58,30 @@ export default function Sinonim() {
     );
   };
 
+  useEffect(() => {
+    if (bab) {
+      getKamusByBab(+bab);
+    }
+  }, [bab]);
+
   return (
     <div>
       <div className="d-flex justify-content-between my-4">
-        <h5 style={{ fontWeight: 600 }}>비슷한 말(Sinonim)</h5>
-        <span className="text-white">
-          {page}/{Math.ceil(data?.count / pageSize)}
-        </span>
+        <h5 style={{ fontWeight: 600 }}>Kosakata Bab {bab}</h5>
+        <span className="text-white">{bab}/60</span>
       </div>
+      {/* <h5>Kosakata Bab {bab}</h5> */}
 
       <Row>
-        {data?.data?.map((item) => {
+        {data?.data?.map((item, idx) => {
           return (
-            <Col key={item.id} lg={12} xl={6} className="p-1">
-              <Row>
-                <Col xs={1} className="py-1">
-                  {/* <span className="text-white">{item?.id}.</span> */}
-                  <Word word={`${item?.id}.`} />
+            <Col key={item?.id} md={12} lg={6}>
+              <Row className="py-1">
+                <Col xs={6}>
+                  <Word word={`${idx + 1}. ${item?.kor}`} />
                 </Col>
-                <Col xs={11} className="p-1">
-                  <Word word={item.kor} />
-                  <Word word={item.ind} />
+                <Col xs={6}>
+                  <Word word={`: ${item?.ind}`} />
                 </Col>
               </Row>
             </Col>
@@ -94,7 +92,7 @@ export default function Sinonim() {
       <div className="text-center text-white my-5">
         <button
           className="secondary__btn"
-          onClick={() => router.push("/sinonim")}
+          onClick={() => router.push("/kosakata/3")}
         >
           <BsChevronDoubleLeft />
         </button>
@@ -102,18 +100,14 @@ export default function Sinonim() {
           <BsChevronLeft /> prev
         </button>
 
-        <span style={{ fontWeight: 600 }}>
-          halaman {page} dari {Math.ceil(data?.count / pageSize)}
-        </span>
+        <span style={{ fontWeight: 600 }}>Bab {bab} dari 60</span>
 
         <button className="secondary__btn" onClick={onNext}>
           next <BsChevronRight />
         </button>
         <button
           className="secondary__btn"
-          onClick={() =>
-            router.push(`/sinonim/?page=${Math.ceil(data?.count / pageSize)}`)
-          }
+          onClick={() => router.push("/kosakata/60")}
         >
           <BsChevronDoubleRight />
         </button>
