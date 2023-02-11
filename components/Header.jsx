@@ -111,7 +111,7 @@ export default function Header() {
                   return (
                     <Link
                       style={{
-                        color: tag.includes(current) ? "#01d293" : "",
+                        color: tag.includes(current) ? "#01d293" : "#fff",
                         fontWeight: 700,
                       }}
                       href={item.path}

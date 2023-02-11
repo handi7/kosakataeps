@@ -99,7 +99,7 @@ export default function Home() {
           </div>
         )
       ) : (
-        <div className="text-center mt-5">
+        <div className="text-center mt-5 px-5">
           <h4>
             Kumpulan kosakata dari standard text book tahun 2015 EPS TOPIK
           </h4>
