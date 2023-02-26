@@ -19,7 +19,7 @@ export default function Bab() {
   const getKamusByBab = async (bab) => {
     try {
       if (bab > 2 && bab <= 60) {
-        const res = await axios.get(`${API_URL}/kamus/getBab/${bab}`);
+        const res = await axios.get(`${API_URL}/words/${bab}`);
         setData(res.data);
       }
     } catch (error) {
@@ -67,7 +67,10 @@ export default function Bab() {
   return (
     <div>
       <div className="d-flex justify-content-between my-4">
-        <h5 style={{ fontWeight: 600 }}>Kosakata Bab {bab}</h5>
+        <div>
+          <h5 style={{ fontWeight: 600 }}>Kosakata Bab {bab}</h5>
+          <span className="text-white">{data?.count} kata</span>
+        </div>
         <span className="text-white">{bab}/60</span>
       </div>
       {/* <h5>Kosakata Bab {bab}</h5> */}

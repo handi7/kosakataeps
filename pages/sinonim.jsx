@@ -20,7 +20,7 @@ export default function Sinonim() {
   const getAntonim = async (page) => {
     try {
       const res = await axios.get(
-        `${API_URL}/sinonim/?offset=${(page - 1) * pageSize}&limit=${pageSize}`
+        `${API_URL}/synonyms/?offset=${(page - 1) * pageSize}&limit=${pageSize}`
       );
       setData(res.data);
     } catch (error) {}
@@ -66,7 +66,10 @@ export default function Sinonim() {
   return (
     <div>
       <div className="d-flex justify-content-between my-4">
-        <h5 style={{ fontWeight: 600 }}>비슷한 말(Sinonim)</h5>
+        <div>
+          <h5 style={{ fontWeight: 600 }}>비슷한 말(Sinonim)</h5>
+          <span className="text-white">{data?.count} kata</span>
+        </div>
         <span className="text-white">
           {page}/{Math.ceil(data?.count / pageSize)}
         </span>
