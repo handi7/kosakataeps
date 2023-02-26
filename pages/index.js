@@ -34,10 +34,8 @@ export default function Home() {
     );
   };
 
-  return <div></div>;
-
   return (
-    <div>
+    <div className="w-100">
       {data?.loading ? (
         <div
           className={
