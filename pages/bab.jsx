@@ -1,9 +1,8 @@
 import { useRouter } from "next/router";
-import React, { Fragment, useEffect, useState } from "react";
-import { Col, Container, Row } from "reactstrap";
-import Layout from "../components";
+import React, { useEffect, useState } from "react";
+import { Col, Row } from "reactstrap";
 
-export default function Perbab() {
+export default function Bab() {
   const [numb, setNumb] = useState([]);
   const router = useRouter();
 
