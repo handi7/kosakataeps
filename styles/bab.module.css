@@ -1,0 +1,12 @@
+.item_ind {
+  animation: fade-out 500ms forwards;
+}
+
+@keyframes fade-out {
+  0% {
+    transform: scale(0.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

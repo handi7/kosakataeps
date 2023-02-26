@@ -7,14 +7,29 @@ import {
   BsChevronLeft,
   BsChevronRight,
 } from "react-icons/bs";
-import { Col, Row } from "reactstrap";
+import {
+  Button,
+  Card,
+  CardText,
+  CardTitle,
+  Col,
+  Nav,
+  NavItem,
+  NavLink,
+  Row,
+  TabContent,
+  TabPane,
+} from "reactstrap";
 import { API_URL } from "../../constants";
+import classes from "../../styles/bab.module.css";
 
 export default function Bab() {
   const router = useRouter();
   const { bab } = router.query;
 
   const [data, setData] = useState([]);
+  const [activeTab, setTab] = useState(1);
+  const [selectedId, setSelected] = useState(0);
 
   const getKamusByBab = async (bab) => {
     try {
@@ -58,6 +73,13 @@ export default function Bab() {
     );
   };
 
+  const onSelect = (id) => {
+    setSelected(id);
+    setTimeout(() => {
+      setSelected(0);
+    }, 1200);
+  };
+
   useEffect(() => {
     if (bab) {
       getKamusByBab(+bab);
@@ -75,22 +97,79 @@ export default function Bab() {
       </div>
       {/* <h5>Kosakata Bab {bab}</h5> */}
 
-      <Row>
-        {data?.data?.map((item, idx) => {
-          return (
-            <Col key={item?.id} md={12} lg={6}>
-              <Row className="py-1">
-                <Col xs={6}>
-                  <Word word={`${idx + 1}. ${item?.kor}`} />
-                </Col>
-                <Col xs={6}>
-                  <Word word={`: ${item?.ind}`} />
-                </Col>
+      <Nav tabs>
+        <NavItem style={{ cursor: "pointer" }}>
+          <NavLink
+            className={`${activeTab === 1 ? "active" : ""}`}
+            onClick={() => setTab(1)}
+          >
+            List
+          </NavLink>
+        </NavItem>
+        <NavItem style={{ cursor: "pointer" }}>
+          <NavLink
+            className={`${activeTab === 2 ? "active" : ""}`}
+            onClick={() => setTab(2)}
+          >
+            Guess & Check
+          </NavLink>
+        </NavItem>
+      </Nav>
+
+      <TabContent activeTab={activeTab}>
+        <TabPane tabId={1}>
+          <Row>
+            <Col sm="12" className="p-3">
+              <Row>
+                {data?.data?.map((item, idx) => {
+                  return (
+                    <Col key={item?.id} md={12} lg={6}>
+                      <Row className="py-1">
+                        <Col xs={6}>
+                          <Word word={`${idx + 1}. ${item?.kor}`} />
+                        </Col>
+                        <Col xs={6}>
+                          <Word word={`: ${item?.ind}`} />
+                        </Col>
+                      </Row>
+                    </Col>
+                  );
+                })}
               </Row>
             </Col>
-          );
-        })}
-      </Row>
+          </Row>
+        </TabPane>
+
+        <TabPane tabId={2}>
+          <Row>
+            <Col sm="12" className="p-3">
+              <Row>
+                {data?.data?.map((item) => {
+                  return (
+                    <Col
+                      key={item?.id}
+                      sm={6}
+                      style={{ cursor: "pointer" }}
+                      className="text-center p-2"
+                      onClick={() => onSelect(item?.id)}
+                    >
+                      {selectedId === item?.id ? (
+                        <div
+                          className={`${classes.item_id} bg-primary text-white py-3`}
+                        >
+                          {item?.ind}
+                        </div>
+                      ) : (
+                        <div className="bg-white py-3">{item?.kor}</div>
+                      )}
+                    </Col>
+                  );
+                })}
+              </Row>
+            </Col>
+          </Row>
+        </TabPane>
+      </TabContent>
 
       <div className="text-center text-white my-5">
         <button
