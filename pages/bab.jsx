@@ -24,7 +24,7 @@ export default function Bab() {
             <Col key={item} xs={6} sm={4} lg={3} className="mb-3">
               <button
                 className="primary__btn w-100"
-                onClick={() => router.push(`/kosakata/${item}`)}
+                onClick={() => router.push(`/bab/${item}`)}
               >
                 BAB {item}
               </button>

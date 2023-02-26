@@ -8,10 +8,6 @@ import {
   BsChevronRight,
 } from "react-icons/bs";
 import {
-  Button,
-  Card,
-  CardText,
-  CardTitle,
   Col,
   Nav,
   NavItem,
