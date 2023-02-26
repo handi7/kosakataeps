@@ -35,8 +35,10 @@ export default function Home() {
   };
 
   return (
-    <div className="w-100">
-      <h5>Kumpulan kosakata dari standard text book tahun 2015 EPS TOPIK</h5>
+    <div className="p-3">
+      <div className="text-center">
+        <h5>Kumpulan kosakata dari standard text book tahun 2015 EPS TOPIK</h5>
+      </div>
       {data?.loading ? (
         <div
           className={
