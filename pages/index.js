@@ -36,6 +36,7 @@ export default function Home() {
 
   return (
     <div className="w-100">
+      <h5>Kumpulan kosakata dari standard text book tahun 2015 EPS TOPIK</h5>
       {data?.loading ? (
         <div
           className={
@@ -100,9 +101,6 @@ export default function Home() {
         )
       ) : (
         <div className="text-center mt-5 px-5">
-          <h4>
-            Kumpulan kosakata dari standard text book tahun 2015 EPS TOPIK
-          </h4>
           <p>hasil pencarian akan ditampilkan di sini.</p>
 
           {/* <GoogleAdsense
