@@ -44,13 +44,13 @@ export default function Bab() {
 
   const onPrev = () => {
     if (+bab > 3) {
-      router.push(`/kosakata/${+bab - 1}`);
+      router.push(`/bab/${+bab - 1}`);
     }
   };
 
   const onNext = () => {
     if (+bab < 60) {
-      router.push(`/kosakata/${+bab + 1}`);
+      router.push(`/bab/${+bab + 1}`);
     }
   };
 
@@ -174,7 +174,7 @@ export default function Bab() {
       <div className="text-center text-white my-5">
         <button
           className="secondary__btn"
-          onClick={() => router.push("/kosakata/3")}
+          onClick={() => router.push("/bab/3")}
         >
           <BsChevronDoubleLeft />
         </button>
@@ -189,7 +189,7 @@ export default function Bab() {
         </button>
         <button
           className="secondary__btn"
-          onClick={() => router.push("/kosakata/60")}
+          onClick={() => router.push("/bab/60")}
         >
           <BsChevronDoubleRight />
         </button>

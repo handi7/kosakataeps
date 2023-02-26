@@ -4,7 +4,7 @@ export const navData = [
     display: "Home",
   },
   {
-    path: "/perbab",
+    path: "/bab",
     display: "Bab",
   },
   {
