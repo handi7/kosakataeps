@@ -17,6 +17,8 @@ export default function Antonim() {
 
   const [data, setData] = useState([]);
 
+  console.log(data);
+
   const getAntonim = async (page) => {
     try {
       const res = await axios.get(
